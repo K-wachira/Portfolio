@@ -9,11 +9,13 @@
   "workspaces": [
     "packages/*"
   ],
+  "scripts": {
+    "client-install": "yarn --cwd ./Packages/client install",
+    "client": "yarn --cwd ./Packages/client run start",
+    "heroku-postbuild": "yarn install && yarn --cwd ./Packages/client install && yarn --cwd ./Packages/client run build"
+    
+  },
   "engines": {
     "yarn": "1.22.19"
-  },
-  "scripts": {
-    "start": "yarn start"
   }
-
 }
