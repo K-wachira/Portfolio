@@ -1,0 +1,116 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Container contaning the header image and text */
+.parentbanner {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+  justify-content: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+  
+}
+
+/* nested Container contaning the header image and text */
+.childbanner {
+  /* background: red; */
+  height: 100%;
+  /* background: rgb(19, 21, 139); */
+  display: flex;
+  align-items: center;
+  justify-content: round;
+}
+/* Header image config */
+.headerimg {
+  width: 100%;
+  height: 150%;
+}
+
+.imagediv {
+  align-content:space-around;
+  padding-left: 50px;
+  height: 40%;
+
+}
+
+.textdiv {
+  align-content:space-around;
+  padding-top: 50px;
+  height: 40%;
+}
+/* Bolds out my name */
+.myname {
+  font-family: "europa";
+  font-weight: 700;
+  font-style: normal;
+  font-size: 50px;
+  line-height: 1.7em;
+  letter-spacing: 0em;
+  text-transform: none;
+  color: #111;
+}
+
+/* Cards that hold the what i am doing/done */
+/* .cards {
+  max-width: 23rem;
+} */
+
+/* title on cards on the front page */
+.card-title {
+  font-family: "europa";
+  font-weight: 500;
+  font-style: normal;
+  font-size: 18px;
+  line-height: 1.7em;
+  letter-spacing: 0em;
+  text-transform: none;
+  color: #111;
+}
+
+.Home_lottieImg__gBEbz {
+  height: 200px;
+  width: auto;
+}
+
+.card {
+  border: none;
+}
