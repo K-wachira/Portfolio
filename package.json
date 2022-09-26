@@ -4,5 +4,12 @@
   "main": "index.js",
   "repository": "https://github.com/K-wachira/Portfolio.git",
   "author": "k-wachira <abkelvinwachira@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "private": "true",
+  "workspaces": [
+    "packages/*"
+  ],
+  "engines": {
+    "yarn": "1.22.19"
+  }
 }
