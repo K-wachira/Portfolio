@@ -11,6 +11,7 @@
     "server/*"
   ],
   "scripts": {
-    "start": "node index.js"
+    "heroku-prebuild": "cd client && npm install && npm run build && cd .. && cd client && npm install",
+    "start": "cd client && npm start"
   }
 }
