@@ -9,5 +9,8 @@
   "workspaces": [
     "client/*",
     "server/*"
-  ]
+  ],
+  "scripts": {
+    "start": "node index.js"
+  }
 }
