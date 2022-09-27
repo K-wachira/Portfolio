@@ -9,11 +9,5 @@
   "workspaces": [
     "client/*",
     "server/*"
-  ],
-  "dependencies": {
-    "serve": "^14.0.1"
-  },
-  "engines": {
-    "yarn": "1.22.19"
-  }
+  ]
 }
