@@ -6,11 +6,8 @@ body {
   line-height: 2.8em;
   letter-spacing: 0em;
   text-rendering: optimizeLegibility;
-}
-@media (max-width: 1080px) {
-  body {
-    padding-top: 0;
-  }
+  height: auto;
+
 }
 
 code {

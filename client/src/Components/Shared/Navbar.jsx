@@ -7,8 +7,8 @@ function MyNavbar() {
   return (
     <Navbar collapseOnSelect expand="lg">
       <Container>
-        <div class="d-sm-none">
-          <img src={locssmileblue} width="40" height="30" class="d-lg-none align-top" alt="Kelvin Wachira"/>
+        <div className="d-sm-none">
+          <img src={locssmileblue} width="40" height="30" className="d-lg-none align-top" alt="Kelvin Wachira"/>
         </div>
         <Navbar.Brand href="/" style={{ fontFamily: "Poetsen One" }}>
           Kelvin
