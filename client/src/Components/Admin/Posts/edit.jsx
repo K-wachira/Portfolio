@@ -3,6 +3,8 @@ import Forms from "./forms.jsx";
 import PostDataService from "../Services/posts.service.js";
 import { useParams, Link } from "react-router-dom";
 import { Editor } from "react-draft-wysiwyg";
+import Loading from "../../Shared/Loading.jsx";
+
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
 const EditPost = (props) => {
@@ -158,8 +160,7 @@ const EditPost = (props) => {
         </div>
       ) : (
         <div className="container">
-          <br />
-          <p>No post selected.</p>
+         <Loading/>
         </div>
       )}
     </div>
