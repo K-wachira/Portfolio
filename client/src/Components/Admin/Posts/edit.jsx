@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Forms from "./forms.jsx";
+import Form from "./_form.jsx";
+import { Helmet } from "react-helmet";
 import PostDataService from "../Services/posts.service.js";
-import { useParams, Link } from "react-router-dom";
-import { Editor } from "react-draft-wysiwyg";
-import Loading from "../../Shared/Loading.jsx";
+import ElementDataService from "../Services/elements.service.js";
 
-import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import { useParams, Link } from "react-router-dom";
+import Loading from "../../Shared/Loading.jsx";
+import RichTextEditor from "react-rte";
 
 const EditPost = (props) => {
   const initialPostState = {
@@ -22,7 +24,7 @@ const EditPost = (props) => {
   const [tags, setTags] = useState();
   const [category, setCategory] = useState();
   const [post_id, setPostId] = useState();
-  const [element_index, setElementIndex] = useState(0);
+  const [element_index, setElementIndex] = useState();
   const [element_body, setElementBody] = useState("");
 
   const params = useParams();
@@ -67,33 +69,42 @@ const EditPost = (props) => {
     category: category,
   };
 
-  function elementEdit(element_index, element_body) {
-    setElementIndex(element_index);
-    setElementBody(element_body);
-    console.log(element_body, element_index);
+  const handleSubmit = (log) => {
+    let data = { ...log };
+    ElementDataService.updateElement(data)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
+  function createElement(post_id) {
+    const data = {
+      post_id: post_id,
+    };
+    ElementDataService.createElement(data)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   }
-
-  function test() {
-    alert(element_body);
+  function deleteElement(element_index, post_id) {
+    const data = {
+      post_id: post_id,
+      element_index: element_index,
+    };
+    ElementDataService.deleteElement(data)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   }
-
-  document.addEventListener("click", (event) => {
-    let element = event.target.closest(".paragraph-content");
-    if (!element) return;
-
-    element.classList.add("d-none");
-    element.nextElementSibling.classList.remove("d-none");
-  });
-
-  document.addEventListener("click", (event) => {
-    if (!event.target.matches(".cancel")) return;
-    event.preventDefault();
-
-    let element = event.target.closest(".paragraph-form");
-
-    element.classList.add("d-none");
-    element.previousElementSibling.classList.remove("d-none");
-  });
 
   return (
     <div>
@@ -113,42 +124,56 @@ const EditPost = (props) => {
               </div>
             </div>
             <div className="col-md-8">
-              <button
-                type="button"
-                className="bi bi-paragraph btn-secondary m-3"
-              >
-                {" "}
-                Palagraph{" "}
-              </button>
+              <div className="d-flex bd-highlight">
+                <h3 className="p-2 bd-highlight">
+                  <i
+                    onClick={() => {
+                      createElement(post._id);
+                    }}
+                    className="bi bi-paragraph"
+                  ></i>
+                </h3>
+                <h3 className="p-2 bd-highlight">
+                  <i className="bi bi-card-image"></i>
+                </h3>
+              </div>
               <div className="card">
                 {post.elements.map((element, key) => {
                   return (
                     <div className="m-2" key={key}>
                       <div className="paragraph-content">
-                        <p>{element.body}</p>
+                        <div className="d-flex flex-row-reverse bd-highlight">
+                          <div className="p-2 bd-highlight">
+                            <i className="bi bi-chevron-compact-up m-3"></i>
+                          </div>
+                          <div className="p-2 bd-highlight">
+                            <i className="bi bi-chevron-compact-down m-3"></i>
+                          </div>
+                        </div>
+                        <div>
+                          <p>{element.body}</p>
+                        </div>
                       </div>
                       <div className="paragraph-form  d-none">
-                        <p>{element.body}</p>
-                        <textarea
-                          className="form-control"
-                          name="description"
-                          type="text-area"
-                          value={element_body}
-                          onChange={(event) =>
-                            setElementBody(event.target.value)
-                          }
-                        />
-                        <div className="">
-                          <button
-                            onClick={() => test()}
-                            className="btn btn-primary m-2"
-                          >
-                            {" "}
-                            Save
-                          </button>
-                          <button className="cancel btn btn-secondary">
-                            Cancel
-                          </button>
+                        <div>
+                          <div className="d-flex flex-row-reverse bd-highlight">
+                            <div className="p-2 bd-highlight">
+                              <i
+                                onClick={() => {
+                                  deleteElement(
+                                    element.element_index,
+                                    post._id
+                                  );
+                                }}
+                                className="bi bi-trash"
+                              ></i>
+                            </div>
+                          </div>
+                          <Form
+                            handleSubmit={handleSubmit}
+                            {...element}
+                            post_id={post._id}
+                          />
                         </div>
                       </div>
                     </div>
@@ -160,11 +185,26 @@ const EditPost = (props) => {
         </div>
       ) : (
         <div className="container">
-         <Loading/>
+          <Loading />
         </div>
       )}
     </div>
   );
 };
+
+document.addEventListener("click", (event) => {
+  let element = event.target.closest(".paragraph-content");
+  if (!element) return;
+  element.classList.add("d-none");
+  element.nextElementSibling.classList.remove("d-none");
+});
+
+document.addEventListener("click", (event) => {
+  if (!event.target.matches(".cancel")) return;
+  event.preventDefault();
+  let element = event.target.closest(".paragraph-form");
+  element.classList.add("d-none");
+  element.previousElementSibling.classList.remove("d-none");
+});
 
 export default EditPost;
