@@ -10,7 +10,7 @@ import animation_500_ from "../../../Assets/Gifs/animation_500_l5tktz3o.gif";
 function Home() {
   return (
     <div>
-      <div className="container parentbanner">
+      <div className="container ">
         <div className="row childbanner">
           <div className="col-sm-12 col-lg-5 col-md-5 text-center align-bottom textdiv">
             <div className="font-weight-bold fs-2 ">
@@ -19,42 +19,44 @@ function Home() {
             <div className="myname">
               <p>Kelvin Wachira</p>
             </div>
-            <div className="">
-              <p>Developer • Techie • Engineer</p>
-            </div>
-            <div>
-              <strong>I am an engineer.</strong>
+            <div className="aboutdiv">
+              <p className="text-decoration-underline font-weight-bold">
+                Developer • Techie • Engineer
+              </p>
               <p>
                 I apply analytic thinking to problems and find a pragmatic
-                solution that isn't a quick fix, but a lasting value.
+                solutions that aren't quick fixes, but of lasting value.
               </p>
             </div>
           </div>
           <div className="imagediv d-none d-md-block col-lg-5 col-md-6">
-             <img className="img-fluid headerimg"  src={locssmileblue} />
+            <img className="img-fluid headerimg" src={locssmileblue} />
           </div>
         </div>
       </div>
-      <div className="container text-center fs-2 fw-bold">
+
+      <div className="container text-center fs-2 fw-bold mt-5">
         <p> Here's what I have done</p>
       </div>
-
-      <div class="container text-center p-3 ">
+      <div class="container text-center ">
         <div class="container">
-          <div class="row d-flex justify-content-round p-5">
+          <div class="row d-flex justify-content-round ">
             {/* <%# Card 1 %> */}
             <div class="col-sm-4">
               <div class="card">
                 <div>
                   <img className="Home_lottieImg__gBEbz" src={animation_500_} />
                 </div>
-                <div class="p-3 ">
-                  <h5 class="card-title" style={{ fontWeight: "bold" }}>Backend Development</h5>
+                <div class="p-2 ">
+                  <h5 class="card-title" style={{ fontWeight: "bold" }}>
+                    Backend Developer
+                  </h5>
                 </div>
                 <div class="card-body">
                   <p class="card-text">
+                    Behind the scenes hero - fulfilled by driving the back-side of success. 
                     With a text editor and a vision, I'm a sucker for writing
-                    code. Breathing life into designs excites me.
+                    code.
                   </p>
                 </div>
               </div>
@@ -65,13 +67,16 @@ function Home() {
                 <div>
                   <img className="Home_lottieImg__gBEbz" src={bluedashboard} />
                 </div>
-                <div class=" p-3 ">
-                  <h5 class="card-title" style={{ fontWeight: "bold" }}>Data Pipeline Automations</h5>
+                <div class=" p-2 ">
+                  <h5 class="card-title" style={{ fontWeight: "bold" }}>
+                    Automation Engineer
+                  </h5>
                 </div>
                 <div class="card-body">
                   <p class="card-text">
-                    Developing user-friendly and visually pleasing dashboards
-                    and writing high reports and testable pipelines.
+                    Salesforce developer with strong Salesforce admin and
+                    development skills. I enable and create user-friendly and visually
+                    pleasing dashboards.
                   </p>
                 </div>
               </div>
@@ -82,9 +87,9 @@ function Home() {
                 <div>
                   <img className="Home_lottieImg__gBEbz" src={fullstack} />
                 </div>
-                <div class=" p-3 ">
+                <div class=" p-2">
                   <h5 class="card-title" style={{ fontWeight: "bold" }}>
-                    Mobile Development
+                    Project Management
                   </h5>
                 </div>
                 <div class="card-body">
@@ -100,19 +105,21 @@ function Home() {
       </div>
 
       <div class="container text-center fs-2 fw-bold mt-5 ">
-        <p> Here's what I am doing</p>
+        <p class="mt-5 "> Here's what I am doing</p>
       </div>
-      <div class="container mt-5 text-center ">
+      <div class="container  text-center  ">
         <div class="container">
-          <div class="row d-flex justify-content-round p-5">
+          <div class="row d-flex justify-content-round">
             {/* <%# Card 1 %> */}
             <div class="col-sm-6">
               <div class="card cards">
                 <div>
                   <img className="Home_lottieImg__gBEbz" src={openssoucecode} />
                 </div>
-                <div class=" p-3 ">
-                  <h5 class="card-title" style={{ fontWeight: "bold" }}>Open-Source Contribution</h5>
+                <div class=" p-2 ">
+                  <h5 class="card-title" style={{ fontWeight: "bold" }}>
+                    Open-Source Contribution
+                  </h5>
                 </div>
                 <div class="card-body">
                   <p class="card-text">
@@ -131,8 +138,10 @@ function Home() {
                 <div>
                   <img className="Home_lottieImg__gBEbz" src={competitive} />
                 </div>
-                <div class=" p-3 ">
-                  <h5 class="card-title" style={{ fontWeight: "bold" }}>Competitive Programming</h5>
+                <div class=" p-2 ">
+                  <h5 class="card-title" style={{ fontWeight: "bold" }}>
+                    Competitive Programming
+                  </h5>
                 </div>
                 <div class="card-body">
                   <p class="card-text">
