@@ -16,7 +16,6 @@ const Views = () => {
       <Route path="/LetsChat" element={<Contact />} />
       <Route path="/Posts" element={<Posts />} />
       <Route path="/editPost/:post_id" element={<EditPost  />} />
-
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );

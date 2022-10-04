@@ -121,11 +121,9 @@ function Home() {
                 </div>
                 <div class="card-body">
                   <p class="card-text">
-                    Wikimedia is a virtual machine, written in C, for running
-                    modern dynamic languages like Perl 6. Since 2007, I have
-                    worked to increase stability of the code by increasing the
-                    number of compiler warnings checked, running static analysis
-                    tools like splint, and instrumenting the code.
+                    Wikimedia is a global movement whose mission is to bring free educational content to the world.
+                    Its written in python. I have
+                    worked on creating scripts that connect various wikimedia objects together to make it more infomative and closer to achieving its goal.
                   </p>
                 </div>
               </div>
