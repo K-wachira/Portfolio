@@ -55,8 +55,7 @@ code {
   align-content: center;
   align-content: space-around;
   line-height: 1.8em;
-  font-size: medium
-
+  font-size: medium;
 }
 /* Bolds out my name */
 .myname {
@@ -103,3 +102,36 @@ code {
 .paragraph:hover {
   transition: background-color 0.5s ease;
 }
+
+.pushable {
+  background: rgb(209, 207, 208);
+  border-radius: 10px;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  outline-offset: 4px;
+}
+.front {
+  display: block;
+  padding: 6px 6px;
+  border-radius: 12px;
+  font-size: 1rem;
+  background: rgb(86, 81, 83);
+  color: white;
+  transform: translateY(-6px);
+}
+
+.pushable:active .front {
+  transform: translateY(-2px);
+}
+
+/* selected link */
+.front:active {
+  color: #ffffff;
+}
+
+/* mouse over link */
+.front:hover {
+  color: #ffffff;
+}
+

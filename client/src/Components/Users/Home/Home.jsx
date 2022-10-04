@@ -14,10 +14,7 @@ function Home() {
         <div className="row childbanner">
           <div className="col-sm-12 col-lg-5 col-md-5 text-center align-bottom textdiv">
             <div className="font-weight-bold fs-2 ">
-              <p>— Hello 👋, meet </p>
-            </div>
-            <div className="myname">
-              <p>Kelvin Wachira</p>
+              <p>Hello 👋, I'm Kelvin Wachira. Thanks for stopping by.</p>
             </div>
             <div className="aboutdiv">
               <p className="text-decoration-underline font-weight-bold">
@@ -34,6 +31,7 @@ function Home() {
           </div>
         </div>
       </div>
+
 
       <div className="container text-center fs-2 fw-bold mt-5">
         <p> Here's what I have done</p>
@@ -54,9 +52,9 @@ function Home() {
                 </div>
                 <div class="card-body">
                   <p class="card-text">
-                    Behind the scenes hero - fulfilled by driving the back-side of success. 
-                    With a text editor and a vision, I'm a sucker for writing
-                    code.
+                    Behind the scenes hero - fulfilled by driving the back-side
+                    of success. With a text editor and a vision, I'm a sucker
+                    for writing code.
                   </p>
                 </div>
               </div>
@@ -75,8 +73,8 @@ function Home() {
                 <div class="card-body">
                   <p class="card-text">
                     Salesforce developer with strong Salesforce admin and
-                    development skills. I enable and create user-friendly and visually
-                    pleasing dashboards.
+                    development skills. I enable and create user-friendly and
+                    visually pleasing dashboards.
                   </p>
                 </div>
               </div>
@@ -105,7 +103,7 @@ function Home() {
       </div>
 
       <div class="container text-center fs-2 fw-bold mt-5 ">
-        <p class="mt-5 "> Here's what I am doing</p>
+        <p class="mt-5 ">Recent Activity</p>
       </div>
       <div class="container  text-center  ">
         <div class="container">
