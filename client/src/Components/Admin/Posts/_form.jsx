@@ -1,5 +1,7 @@
 import React from "react";
 import { useState } from "react";
+import { Editor } from "react-draft-wysiwyg";
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
 function Forms(props) {
   const [elementBody, setElementBody] = useState(props.body);
@@ -32,13 +34,19 @@ function Forms(props) {
           />
         </div>
 
-        <div className="actions m-4 ">
-          <input
-            type="submit"
-            value="Save"
-            className="btn btn-primary btn-block"
-          />
-          <button className="cancel btn btn-secondary"> Cancel</button>
+        <div className="actions m-1">
+          <div className="d-flex flex-row bd-highlight">
+            <div className="p-1 bd-highlight">
+              <input
+                type="submit"
+                value="Save"
+                className="btn btn-primary btn-block"
+              />
+            </div>
+            <div className="p-1 bd-highlight">
+              <i className="cancel btn btn-secondary bi bi-x-lg"></i>
+            </div>
+          </div>
         </div>
       </form>
     </div>

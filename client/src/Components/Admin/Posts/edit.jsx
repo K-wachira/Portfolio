@@ -4,7 +4,7 @@ import Form from "./_form.jsx";
 import { Helmet } from "react-helmet";
 import PostDataService from "../Services/posts.service.js";
 import ElementDataService from "../Services/elements.service.js";
-
+import ControlledEditor from "./editor.jsx";
 import { useParams, Link } from "react-router-dom";
 import Loading from "../../Shared/Loading.jsx";
 import RichTextEditor from "react-rte";
@@ -16,7 +16,7 @@ const EditPost = (props) => {
     description: "",
     category: "",
     tags: [],
-    elements: [],
+    elements: [{}],
   };
   const [post, setPost] = useState(initialPostState);
   const [title, setTitle] = useState();
@@ -24,9 +24,9 @@ const EditPost = (props) => {
   const [tags, setTags] = useState();
   const [category, setCategory] = useState();
   const [post_id, setPostId] = useState();
+
   const [element_index, setElementIndex] = useState();
   const [element_body, setElementBody] = useState("");
-
   const params = useParams();
 
   const getPost = (id) => {
@@ -46,7 +46,7 @@ const EditPost = (props) => {
 
   useEffect(() => {
     getPost(params.post_id);
-  }, [params.post_id]);
+  }, []);
 
   const handleForm = (log) => {
     const id = {
@@ -61,6 +61,7 @@ const EditPost = (props) => {
         console.log(e);
       });
   };
+
   props = {
     handleForm: handleForm,
     title: title,
@@ -71,18 +72,20 @@ const EditPost = (props) => {
 
   const handleSubmit = (log) => {
     let data = { ...log };
-    ElementDataService.updateElement(data)
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+    alert(data.editorState)
+    // ElementDataService.updateElement(data)
+    //   .then((response) => {
+    //     console.log(response);
+    //   })
+    //   .catch((e) => {
+    //     console.log(e);
+    //   });
   };
 
   function createElement(post_id) {
     const data = {
       post_id: post_id,
+      element_index: post.elements.length,
     };
     ElementDataService.createElement(data)
       .then((response) => {
@@ -92,6 +95,7 @@ const EditPost = (props) => {
         console.log(e);
       });
   }
+
   function deleteElement(element_index, post_id) {
     const data = {
       post_id: post_id,
@@ -106,13 +110,15 @@ const EditPost = (props) => {
       });
   }
 
+  function test() {
+    console.log("Clicked");
+  }
   return (
     <div>
       {post._id ? (
         <div className="container">
-          <Link to={"/Posts"} className="btn btn-primary   mx-1 mb-1">
-            {" "}
-            Back{" "}
+          <Link to={"/Posts"} className="btn btn-primary mx-1 mb-1">
+            Back
           </Link>
           <div className="row">
             <div className="col-md-4">
@@ -124,61 +130,99 @@ const EditPost = (props) => {
               </div>
             </div>
             <div className="col-md-8">
-              <div className="d-flex bd-highlight">
-                <h3 className="p-2 bd-highlight">
-                  <i
-                    onClick={() => {
-                      createElement(post._id);
-                    }}
-                    className="bi bi-paragraph"
-                  ></i>
-                </h3>
-                <h3 className="p-2 bd-highlight">
-                  <i className="bi bi-card-image"></i>
-                </h3>
-              </div>
               <div className="card">
-                {post.elements.map((element, key) => {
-                  return (
-                    <div className="m-2" key={key}>
-                      <div className="paragraph-content">
-                        <div className="d-flex flex-row-reverse bd-highlight">
-                          <div className="p-2 bd-highlight">
-                            <i className="bi bi-chevron-compact-up m-3"></i>
-                          </div>
-                          <div className="p-2 bd-highlight">
-                            <i className="bi bi-chevron-compact-down m-3"></i>
-                          </div>
-                        </div>
-                        <div>
-                          <p>{element.body}</p>
-                        </div>
-                      </div>
-                      <div className="paragraph-form  d-none">
-                        <div>
-                          <div className="d-flex flex-row-reverse bd-highlight">
-                            <div className="p-2 bd-highlight">
-                              <i
-                                onClick={() => {
-                                  deleteElement(
-                                    element.element_index,
-                                    post._id
-                                  );
-                                }}
-                                className="bi bi-trash"
-                              ></i>
+                <div className="card-body">
+                  <div className="d-flex bd-highlight">
+                    <h3 className="p-2 bd-highlight">
+                      <i
+                        onClick={() => {
+                          createElement(post._id);
+                        }}
+                        className="bi bi-paragraph"
+                      ></i>
+                    </h3>
+                    <h3 className="p-2 bd-highlight">
+                      <i className="bi bi-card-image"></i>
+                    </h3>
+                  </div>
+                  <div className="bg-light">
+                    {post.elements.map((element, key) => {
+                      return (
+                        <div className="mb-2 p-3 paragraph " key={key}>
+                          <div className="m-2">
+                            <div className="d-flex flex-row-reverse bd-highlight">
+                              <div className="p-1 bd-highlight">
+                                <i
+                                  onClick={() => {
+                                    test();
+                                  }}
+                                  className="bi bi-chevron-compact-up "
+                                ></i>
+                              </div>
+                              <div className="p-1 bd-highlight">
+                                <i
+                                  onClick={() => {
+                                    test();
+                                  }}
+                                  className="bi bi-chevron-compact-down"
+                                ></i>
+                              </div>
+                              <div className="p-1 bd-highlight">
+                                {element.hidden ? (
+                                  <i
+                                    onClick={() => {
+                                      test();
+                                    }}
+                                    className="bi bi-eye-slash"
+                                  ></i>
+                                ) : (
+                                  <i
+                                    onClick={() => {
+                                      test();
+                                    }}
+                                    className="bi bi-eye"
+                                  ></i>
+                                )}
+                              </div>
+                            </div>
+                            <div className="paragraph-content">
+                              <div>
+                                <p>{element.body}</p>
+                              </div>
+                            </div>
+                            <div className="paragraph-form  d-none">
+                              <div>
+                                <div className="d-flex flex-row-reverse bd-highlight">
+                                  <div className="p-2 bd-highlight">
+                                    <i
+                                      onClick={() => {
+                                        deleteElement(
+                                          element.element_index,
+                                          post._id
+                                        );
+                                      }}
+                                      className="cancel bi bi-trash"
+                                    ></i>
+                                  </div>
+                                </div>
+                                {/* <Form
+                                  handleSubmit={handleSubmit}
+                                  {...element}
+                                  post_id={post._id}
+                                /> */}
+                                <ControlledEditor
+                                  handleSubmit={handleSubmit}
+                                  {...element}
+                                  post_id={post._id}
+                                />
+                              </div>
                             </div>
                           </div>
-                          <Form
-                            handleSubmit={handleSubmit}
-                            {...element}
-                            post_id={post._id}
-                          />
                         </div>
-                      </div>
-                    </div>
-                  );
-                })}
+                      );
+                    })}
+                  </div>
+                </div>
               </div>
             </div>
           </div>

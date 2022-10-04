@@ -1,6 +1,5 @@
 import { useContext } from "react";
 import { Route, Routes, Link } from "react-router-dom";
-import { AccountContext } from "./AccountContext";
 import Home from "./Users/Home/Home.jsx";
 import Contact from "./Users/Home/Contact.jsx";
 import Posts from "./Admin/Posts/index.jsx";
