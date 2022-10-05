@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Forms from "./forms.jsx";
 import Form from "./_form.jsx";
-import { Helmet } from "react-helmet";
 import PostDataService from "../Services/posts.service.js";
 import ElementDataService from "../Services/elements.service.js";
 import ControlledEditor from "./editor.jsx";
 import { useParams, Link } from "react-router-dom";
 import Loading from "../../Shared/Loading.jsx";
-import RichTextEditor from "react-rte";
 
 const EditPost = (props) => {
   const initialPostState = {
@@ -72,7 +70,7 @@ const EditPost = (props) => {
 
   const handleSubmit = (log) => {
     let data = { ...log };
-    alert(data.editorState)
+    alert(data.editorState);
     // ElementDataService.updateElement(data)
     //   .then((response) => {
     //     console.log(response);

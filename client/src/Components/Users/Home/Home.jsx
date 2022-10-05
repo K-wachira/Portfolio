@@ -10,7 +10,7 @@ import animation_500_ from "../../../Assets/Gifs/animation_500_l5tktz3o.gif";
 function Home() {
   return (
     <div>
-      <div className="container ">
+      <div className="container parentbanner">
         <div className="row childbanner">
           <div className="col-sm-12 col-lg-5 col-md-5 text-center align-bottom textdiv">
             <div className="font-weight-bold fs-2 ">

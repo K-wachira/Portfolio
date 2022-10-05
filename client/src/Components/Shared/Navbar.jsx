@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 function MyNavbar() {
   return (
-    <Navbar collapseOnSelect expand="lg">
+    <Navbar collapseOnSelect expand="lg" fixed="top" bg="light" >
       <Container>
         <div className="d-sm-none">
           <img
