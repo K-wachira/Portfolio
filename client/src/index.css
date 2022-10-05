@@ -129,9 +129,25 @@ code {
 .front:active {
   color: #ffffff;
 }
+.front:link {
+  text-decoration: none;
+}
 
 /* mouse over link */
 .front:hover {
   color: #ffffff;
 }
 
+.contact {
+  max-width: 40%;
+}
+
+.contactbanner {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+  justify-content: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
