@@ -10,6 +10,8 @@ function Contact() {
             Whether it's an interesting idea for a project that you have, some
             consultancy work you may need, or just a quick hello, I'd love to
             chat! I typically respond within a few hours.
+
+            polyglot with experience learning a new language
           </p>
           <div></div>
           Please reach out to{" "}
