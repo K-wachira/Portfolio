@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Forms from "./forms.jsx";
-import Form from "./_form.jsx";
+// import Editor from "./_form.jsx";
 import PostDataService from "../Services/posts.service.js";
 import ElementDataService from "../Services/elements.service.js";
-import ControlledEditor from "./editor.jsx";
+import Editor from "./editor.jsx";
 import { useParams, Link } from "react-router-dom";
 import Loading from "../../Shared/Loading.jsx";
+import parse from 'html-react-parser'
 
 const EditPost = (props) => {
   const initialPostState = {
@@ -17,25 +18,12 @@ const EditPost = (props) => {
     elements: [{}],
   };
   const [post, setPost] = useState(initialPostState);
-  const [title, setTitle] = useState();
-  const [description, setDescription] = useState();
-  const [tags, setTags] = useState();
-  const [category, setCategory] = useState();
-  const [post_id, setPostId] = useState();
-
-  const [element_index, setElementIndex] = useState();
-  const [element_body, setElementBody] = useState("");
   const params = useParams();
 
   const getPost = (id) => {
     PostDataService.get(id)
       .then((response) => {
         setPost(response.data);
-        setTitle(response.data.title);
-        setDescription(response.data.description);
-        setTags(response.data.tags);
-        setCategory(response.data.category);
-        setPostId(response.data._id);
       })
       .catch((e) => {
         console.log(e);
@@ -48,12 +36,12 @@ const EditPost = (props) => {
 
   const handleForm = (log) => {
     const id = {
-      post_id: post_id,
+      post_id: post.post_id,
     };
     let obj = { ...log, ...id };
     PostDataService.updatePost(obj)
       .then((response) => {
-        getPost(post_id);
+        getPost(post.post_id);
       })
       .catch((e) => {
         console.log(e);
@@ -62,22 +50,26 @@ const EditPost = (props) => {
 
   props = {
     handleForm: handleForm,
-    title: title,
-    description: description,
-    tags: tags,
-    category: category,
+    title: post.title,
+    description: post.description,
+    tags: post.tags,
+    category: post.category,
   };
 
-  const handleSubmit = (log) => {
-    let data = { ...log };
-    alert(data.editorState);
-    // ElementDataService.updateElement(data)
-    //   .then((response) => {
-    //     console.log(response);
-    //   })
-    //   .catch((e) => {
-    //     console.log(e);
-    //   });
+  const handleSubmit = (data) => {
+    ElementDataService.updateElement(data)
+      .then((response) => {
+        console.log(response);
+        let temp_element = post[data.element_index]
+        console.log(temp_element)
+        temp_element.body = data.body
+        console.log(temp_element)
+        post[data.element_index] =  temp_element
+        console.log(post)
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
 
   function createElement(post_id) {
@@ -185,7 +177,7 @@ const EditPost = (props) => {
                             </div>
                             <div className="paragraph-content">
                               <div>
-                                <p>{element.body}</p>
+                                <p>{parse(element.body)}</p>
                               </div>
                             </div>
                             <div className="paragraph-form  d-none">
@@ -203,12 +195,8 @@ const EditPost = (props) => {
                                     ></i>
                                   </div>
                                 </div>
-                                {/* <Form
-                                  handleSubmit={handleSubmit}
-                                  {...element}
-                                  post_id={post._id}
-                                /> */}
-                                <ControlledEditor
+
+                                <Editor
                                   handleSubmit={handleSubmit}
                                   {...element}
                                   post_id={post._id}
