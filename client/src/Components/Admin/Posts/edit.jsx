@@ -59,13 +59,7 @@ const EditPost = (props) => {
   const handleSubmit = (data) => {
     ElementDataService.updateElement(data)
       .then((response) => {
-        console.log(response);
-        let temp_element = post[data.element_index]
-        console.log(temp_element)
-        temp_element.body = data.body
-        console.log(temp_element)
-        post[data.element_index] =  temp_element
-        console.log(post)
+        post.elements[data.element_index].body = data.body
       })
       .catch((e) => {
         console.log(e);
