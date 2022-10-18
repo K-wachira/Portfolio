@@ -1,6 +1,8 @@
 import "./App.css";
 import MyNavbar from "./Components/Shared/Navbar.jsx";
 import Views from "./Components/Views.jsx";
+import { ToastContainer } from "react-toastify";
+
 import {
   BrowserRouter as Router,
   Routes,
@@ -10,10 +12,11 @@ import {
 
 function App() {
   return (
-      <Router>
-        <MyNavbar />
-        <Views />
-      </Router>
+    <Router>
+      <ToastContainer />
+      <MyNavbar />
+      <Views />
+    </Router>
   );
 }
 
