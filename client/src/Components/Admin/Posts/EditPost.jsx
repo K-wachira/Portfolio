@@ -18,7 +18,7 @@ const EditPost = (props) => {
     tags: [],
     elements: [{}],
   };
-  const [post, setPost] = useState(initialPostState);
+  const [post, setPost] = useState([]);
   const params = useParams();
 
   useEffect(() => {
@@ -69,14 +69,16 @@ const EditPost = (props) => {
   };
 
   const handleForm = (log) => {
+    console.log("Log data: ", log);
     const id = {
-      post_id: post.post_id,
+      post_id: post._id,
     };
+    console.log("post", post);
     let obj = { ...log, ...id };
     PostDataService.updatePost(obj)
       .then((response) => {
         notify({ value: "Post Update" });
-        getPost(post.post_id);
+        getPost(post._id);
       })
       .catch((e) => {
         console.log(e);
@@ -95,6 +97,7 @@ const EditPost = (props) => {
     ElementDataService.updateElement(data)
       .then((response) => {
         post.elements[data.element_index].body = data.body;
+        getPost(post._id);
         notify({ value: "Element Update" });
       })
       .catch((e) => {
@@ -110,8 +113,7 @@ const EditPost = (props) => {
     ElementDataService.createElement(data)
       .then((response) => {
         notify({ value: "Element Create" });
-
-        console.log(response);
+        getPost(post._id);
       })
       .catch((e) => {
         console.log(e);
@@ -125,8 +127,8 @@ const EditPost = (props) => {
     };
     ElementDataService.deleteElement(data)
       .then((response) => {
-        console.log(response);
         notify({ value: "Element Delete" });
+        getPost(post._id);
       })
       .catch((e) => {
         console.log(e);
@@ -134,8 +136,7 @@ const EditPost = (props) => {
   }
 
   function test() {
-    console.log("Clicked!");
-    notify({ value: "Element Create" });
+     notify({ value: "Element Create" });
   }
   return (
     <div className="container pt-5">
