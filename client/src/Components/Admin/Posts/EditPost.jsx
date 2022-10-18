@@ -131,18 +131,18 @@ const EditPost = (props) => {
       .catch((e) => {
         console.log(e);
       });
-    }
+  }
 
   function test() {
     console.log("Clicked!");
     notify({ value: "Element Create" });
   }
   return (
-    <div>
+    <div className="container pt-5">
       {post._id ? (
-        <div className="container">
-          <Link to={"/Posts"} className="btn btn-primary mx-1 mb-1">
-            Back
+        <div className="container pt-5">
+          <Link to={"/Posts"} className="btn btn-primary mx-4 mb-1">
+            All Posts
           </Link>
           <div className="row">
             <div className="col-md-4">
