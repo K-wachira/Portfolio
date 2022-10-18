@@ -3,11 +3,37 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import PostDataService from "../Services/posts.service.js";
 import Loading from "../../Shared/Loading.jsx";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const PostList = (props) => {
   const [posts, setPosts] = useState([]);
   const [categories, setCategories] = useState([]);
 
+
+    const notify = (props) => {
+    console.log(props.value);
+    let options = {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      theme: "colored",
+    };
+    switch (props.value) {
+      case "Post Create":
+        return toast.success("New Post Created!", options);
+      case "Post Delete":
+        return toast.success("Post Deleted!", options);
+      case "Post Publish":
+        return toast.success("Post Published!", options);
+      case "Post Unpublish":
+        return toast.success("Post Unpublished!", options);
+      default:
+        return toast.warn("Did not excecute cases", options);
+    }
+  };
   useEffect(() => {
     retrievePosts();
     // retrievCategories();
