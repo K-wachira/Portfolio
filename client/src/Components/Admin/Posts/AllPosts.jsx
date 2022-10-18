@@ -7,6 +7,7 @@ import Loading from "../../Shared/Loading.jsx";
 const PostList = (props) => {
   const [posts, setPosts] = useState([]);
   const [categories, setCategories] = useState([]);
+
   useEffect(() => {
     retrievePosts();
     // retrievCategories();
@@ -16,6 +17,18 @@ const PostList = (props) => {
     PostDataService.getAll()
       .then((response) => {
         setPosts(response.data.posts);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
+  const createNewPost = () => {
+    console.log("New Post")
+    PostDataService.createPost()
+      .then((response) => {
+        notify({value: "Post Create"})
+        retrievePosts();
       })
       .catch((e) => {
         console.log(e);
@@ -33,7 +46,15 @@ const PostList = (props) => {
           <div className="container pt-5">
             <h4 className="d-flex justify-content-between mb-4">
               <span> Posts </span>
-              <button className="btn btn-primary"> New Post </button>
+              <button
+                className="btn btn-primary"
+                onClick={() => {
+                  createNewPost();
+                }}
+              >
+                {" "}
+                New Post{" "}
+              </button>
             </h4>
             {posts.map((post, key) => {
               return (
