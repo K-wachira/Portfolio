@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import Forms from "./forms.jsx";
+import Forms from "./TitleForm.jsx";
 // import Editor from "./_form.jsx";
 import PostDataService from "../Services/posts.service.js";
 import ElementDataService from "../Services/elements.service.js";
-import Editor from "./editor.jsx";
+import Editor from "./RichEditor.jsx";
 import { useParams, Link } from "react-router-dom";
 import Loading from "../../Shared/Loading.jsx";
 import parse from "html-react-parser";
@@ -29,8 +29,8 @@ const EditPost = (props) => {
     console.log(props.value);
     let options = {
       position: "top-center",
-      autoClose: 5000,
-      hideProgressBar: false,
+      autoClose: 1000,
+      hideProgressBar: true,
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,
@@ -136,8 +136,9 @@ const EditPost = (props) => {
   }
 
   function test() {
-     notify({ value: "Element Create" });
+    notify({ value: "Element Create" });
   }
+
   return (
     <div className="container pt-5">
       {post._id ? (
