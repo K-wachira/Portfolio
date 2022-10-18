@@ -13,8 +13,8 @@ class PostDataService {
       return http.get(`posts?${by}=${query}&page=${page}`);
     } 
   
-    createPost(data) {
-      return http.post("/new_post", data);
+    createPost() {
+      return http.post("/post");
     }
   
     updatePost(data) {
