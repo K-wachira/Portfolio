@@ -1,11 +1,14 @@
 import React from "react";
 import { useState } from "react";
-import { TagsInput } from "react-tag-input-component";
+import TagsInput from "react-tagsinput";
+
+import "react-tagsinput/react-tagsinput.css";
 
 function Forms(props) {
+  console.log(Object.values(props.tags));
   const [title, setTitle] = useState(props.title);
   const [description, setDescription] = useState(props.description);
-  const [tags, setTags] = useState(props.tags);
+  const [tags, setTags] = useState(Object.values(props.tags));
   const [category, setCategory] = useState(props.category);
   const handleSubmit = (e) => {
     props.handleForm({ title, description, tags, category });
@@ -41,12 +44,7 @@ function Forms(props) {
         </div>
         <div className="form-group">
           <label>Tags:</label>
-          <TagsInput
-            name="tags"
-            placeHolder="Enter Tags"
-             value={tags}
-            onChange={setTags}
-          />
+          <TagsInput value={tags} onChange={setTags} />
         </div>
         <div className="form-group">
           <label>Category:</label>
