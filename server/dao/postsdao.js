@@ -1,104 +1,34 @@
+import postModel from "../models/postModel.js";
 import mongodb from "mongodb";
 const ObjectId = mongodb.ObjectID;
-let posts;
 
 export default class PostsDAO {
-  static async injectDB(conn) {
-    if (posts) {
-      return;
-    }
-    try {
-      posts = await conn.db(process.env.BLOG_NS).collection("posts");
-    } catch (e) {
-      console.error(
-        `Unable to establish a collection handle in postsDAO: ${e}`
-      );
-    }
-  }
-
   static async createNewPost(post) {
     try {
-      const results = await posts.insertOne(post);
-      return results;
-    } catch (e) {
-      console.log(e.message);
+      const results_post = await postModel.create(post);
+      return results_post;
+    } catch (error) {
+      return { error: error.message };
     }
   }
 
   static async getPosts({ filters = null, page = 0, postsPerPage = 20 } = {}) {
-    let query;
-    if (filters) {
-      if ("name" in filters) {
-        query = { $text: { $search: filters["name"] } };
-      } else if ("cuisine" in filters) {
-        query = { cuisine: { $eq: filters["cuisine"] } };
-      } else if ("zipcode" in filters) {
-        query = { "address.zipcode": { $eq: filters["zipcode"] } };
-      }
-    }
-
-    let cursor;
-
     try {
-      cursor = await posts.find(query);
-    } catch (e) {
-      console.error(`Unable to issue find command, ${e}`);
-      return { postsList: [], totalNumPosts: 0 };
-    }
-
-    const displayCursor = cursor.limit(postsPerPage).skip(postsPerPage * page);
-
-    try {
-      const postsList = await displayCursor.toArray();
-      const totalNumPosts = await posts.countDocuments(query);
-
-      return { postsList, totalNumPosts };
-    } catch (e) {
-      console.error(
-        `Unable to convert cursor to array or problem counting documents, ${e}`
-      );
-      return { postsList: [], totalNumPosts: 0 };
+      const posts = postModel.find({}).sort({ createdAt: 1 });
+      return posts;
+    } catch (error) {
+      return { error: error.message };
     }
   }
 
   static async getPostByID(id) {
     try {
-      const pipeline = [
-        {
-          $match: {
-            _id: new ObjectId(id),
-          },
-        },
-        {
-          $lookup: {
-            from: "posts",
-            let: {
-              id: "$_id",
-            },
-            pipeline: [
-              {
-                $match: {
-                  $expr: {
-                    $eq: ["$posts_id", "$$id"],
-                  },
-                },
-              },
-              {
-                $sort: {
-                  date: -1,
-                },
-              },
-            ],
-            as: "posts",
-          },
-        },
-        {
-          $addFields: {
-            posts: "$posts",
-          },
-        },
-      ];
-      return await posts.aggregate(pipeline).next();
+      const single_post = postModel.findById(id);
+      if (!single_post) {
+        return { error: "Post Not Found" };
+      } else {
+        return single_post;
+      }
     } catch (e) {
       console.error(`Something went wrong in getRestaurantByID: ${e}`);
       throw e;
@@ -118,7 +48,7 @@ export default class PostsDAO {
 
   static async updateElementIndex(post_id, elementsArray) {
     try {
-      return await posts.updateOne(
+      return await postModel.findOneAndUpdate(
         { _id: ObjectId(post_id) },
         { $set: { elements: elementsArray } }
       );
@@ -127,6 +57,17 @@ export default class PostsDAO {
       throw e;
     }
     2;
+  }
+
+  static async publishPost(post_id, flag) {
+    try {
+      return await postModel.findOneAndUpdate(
+        { _id: ObjectId(post_id) },
+        { $set: { published: flag, published_at: Date.now() } }
+      );
+    } catch (e) {
+      throw e;
+    }
   }
 
   static async getTags() {
@@ -150,10 +91,9 @@ export default class PostsDAO {
     }
   }
 
-
   static async updatePostById(update_data) {
     try {
-      const updateResponse = await posts.updateOne(
+      const updateResponse = await postModel.findOneAndUpdate(
         { _id: ObjectId(update_data.post_id) },
         {
           $set: {
@@ -162,7 +102,6 @@ export default class PostsDAO {
             cover_image: update_data.cover_image,
             category: update_data.category,
             tags: update_data.tags,
-            updated_at: update_data.updated_at,
           },
         }
       );
@@ -174,29 +113,9 @@ export default class PostsDAO {
     }
   }
 
-  static async pusblishPostById(publish_data) {
-    console.log(publish_data);
-    try {
-      const updateResponse = await posts.updateOne(
-        { _id: ObjectId(publish_data.post_id) },
-        {
-          $set: {
-            published: true,
-            published_at: publish_data.published_at,
-          },
-        }
-      );
-      console.log(updateResponse);
-      return updateResponse;
-    } catch (e) {
-      console.error(`Unable to publish post: ${e}`);
-      return { error: e };
-    }
-  }
-
   static async deletePostById(post_id) {
     try {
-      const deletePost = await posts.deleteOne({
+      const deletePost = await postModel.findOneAndDelete({
         _id: ObjectId(post_id),
       });
       return deletePost;

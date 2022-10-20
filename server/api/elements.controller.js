@@ -10,15 +10,19 @@ export default class ElementsController {
       const post = await PostsDAO.getPostByID(post_id);
       delete req.body.post_id;
       req.body.element_index = post.elements.length;
-      const dates = {
+      const element = {
         created_at: Date.now(),
         updated_at: Date.now(),
+        body: "Add content ...",
+        element_index: req.body.element_index
       };
-      let element = { ...req.body, ...dates };
+
       const ElementResponse = await ElementsDAO.addElement(
         element,
         post_id
-      ).then();
+      ).then((response) => {
+        ElementsDAO.elementIndexRealignment(post_id);
+      });
       res.status(200).json({
         status: "Element Added Successfully",
         data: ElementResponse,
@@ -31,11 +35,16 @@ export default class ElementsController {
 
   // Edit existing element
   static async apiUpdateElement(req, res) {
+    let element = {
+      body: req.body.body,
+      element_idx: req.body.element_index,
+    };
+    let post_id = req.body.post_id;
     try {
       req.body.updated_at = Date.now();
       const updateElementResponse = await ElementsDAO.updateElement(
-        req.body.post_id,
-        req.body
+        post_id,
+        element
       );
 
       var { error } = updateElementResponse;

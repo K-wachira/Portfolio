@@ -1,26 +1,29 @@
 import mongodb from "mongodb";
 const ObjectId = mongodb.ObjectID;
 import PostsDAO from "./postsdao.js";
+import postModel from "../models/postModel.js";
 
-let posts;
 
 export default class ElementsDAO {
-  static async injectDB(conn) {
-    if (posts) {
-      return;
-    }
+  static async updateUpdatedTime(post_id) {
     try {
-      posts = await conn.db(process.env.BLOG_NS).collection("posts");
-    } catch (e) {
-      console.error(
-        `Unable to establish collection handles in elementsDao: ${e}`
+      const updateResponse = await postModel.findOneAndUpdate(
+        { _id: ObjectId(post_id) },
+        {
+          $set: {
+            updated_at: Date.now(),
+          },
+        }
       );
+    } catch (e) {
+      return { error: e };
     }
   }
 
   static async addElement(element, post_id) {
     try {
-      return await posts.updateOne(
+      this.updateUpdatedTime(post_id);
+      return await postModel.findOneAndUpdate(
         { _id: ObjectId(post_id) },
         { $push: { elements: element } }
       );
@@ -31,14 +34,14 @@ export default class ElementsDAO {
   }
 
   static async updateElement(post_id, element) {
-    console.log(post_id, element);
     try {
-      const updateResponse = await posts.updateOne(
+      const updateResponse = await postModel.findOneAndUpdate(
         { _id: ObjectId(post_id) },
         {
           $set: {
             "elements.$[elem].body": element.body,
             "elements.$[elem].updated_at": element.updated_at,
+            updated_at: Date.now(),
           },
         },
         {
@@ -59,11 +62,16 @@ export default class ElementsDAO {
 
   static async deleteElement(post_id, element_idx) {
     try {
-      const deleteResponse = await posts.updateOne(
+      this.updateUpdatedTime(post_id);
+      const deleteResponse = await postModel.findOneAndUpdate(
         {
           _id: ObjectId(post_id),
         },
-        { $pull: { elements: { element_index: element_idx } } }
+        {
+          $pull: {
+            elements: { element_index: element_idx },
+          },
+        }
       );
 
       return deleteResponse;
@@ -80,7 +88,10 @@ export default class ElementsDAO {
       for (let index = 0; index < elements.length; index++) {
         elements[index].element_index = index;
       }
-      const updatedElements = await PostsDAO.updateElementIndex(post_id, elements)
+      const updatedElements = await PostsDAO.updateElementIndex(
+        post_id,
+        elements
+      );
       return updatedElements;
     } catch (e) {
       console.error(`Unable to realign element indexes: ${e}`);

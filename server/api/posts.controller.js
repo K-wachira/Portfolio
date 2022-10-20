@@ -1,5 +1,4 @@
 import PostsDAO from "../dao/postsdao.js";
-import PostSchema from "../models/postsSchema.js";
 
 export default class PostsController {
   // Get all posts
@@ -18,7 +17,7 @@ export default class PostsController {
       filters.name = req.query.name;
     }
 
-    const { postsList, totalNumPosts } = await PostsDAO.getPosts({
+    const postsList = await PostsDAO.getPosts({
       filters,
       page,
       postsPerPage,
@@ -29,23 +28,23 @@ export default class PostsController {
       page: page,
       filters: filters,
       entries_per_page: postsPerPage,
-      total_results: totalNumPosts,
+      // total_results: totalNumPosts,
     };
-    res.json(response);
+    res.json(postsList);
   }
 
   // Create new Post
   static async apiNewPost(req, res) {
-    const dates = {
-      created_at: Date.now(),
-      updated_at: Date.now(),
+    let obj = {
+      title: "This is title Number 1",
+      description: "Description Goes Here",
+      category: "Leetcode",
+      tags: ["Arrays"]
     };
-    let obj = { ...req.body, ...dates };
     try {
-      const { post } = await PostsDAO.createNewPost(obj);
+      const post = await PostsDAO.createNewPost(obj);
       res.status(200).json(post);
     } catch (e) {
-      console.log(e.message);
       res.status(500).json(e);
     }
   }
@@ -98,12 +97,11 @@ export default class PostsController {
   }
 
   static async apiPublishPost(req, res) {
-    const dates = {
-      published_at: Date.now(),
-    };
-    let obj = { ...req.body, ...dates };
     try {
-      const post_publish_response = await PostsDAO.pusblishPostById(obj);
+      const post_publish_response = await PostsDAO.publishPost(
+        req.body.post_id,
+        req.body.flag
+      );
       res.status(200).json({
         status: "Post published Successfully",
         data: post_publish_response,
