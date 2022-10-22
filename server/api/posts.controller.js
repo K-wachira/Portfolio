@@ -80,12 +80,8 @@ export default class PostsController {
   }
 
   static async apiUpdatePost(req, res) {
-    const dates = {
-      updated_at: Date.now(),
-    };
-    let obj = { ...req.body, ...dates };
     try {
-      const postUpdateResponse = await PostsDAO.updatePostById(obj);
+      const postUpdateResponse = await PostsDAO.updatePostById(req);
       res.status(200).json({
         status: "Post Updated Successfully",
         data: postUpdateResponse,
@@ -122,6 +118,17 @@ export default class PostsController {
     } catch (e) {
       console.log(e);
       res.status(500).json({ error: e.message });
+    }
+  }
+
+  static async apiUploadCover(req, res) {
+    console.log("Image", Object.keys(req.file));
+    try {
+      const image_upload = await PostsDAO.uploadCover(req);
+      res.status(200).json({ state: "ish_ish" });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: error.message });
     }
   }
 }
