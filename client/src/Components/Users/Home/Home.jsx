@@ -1,7 +1,6 @@
 import React from "react";
 import locssmileblue from "../../../Assets/Images/locssmileblue.svg";
 import bluedashboard from "../../../Assets/Gifs/bluedashboard.gif";
-import development from "../../../Assets/Gifs/development.gif";
 import openssoucecode from "../../../Assets/Gifs/openssoucecode.gif";
 import fullstack from "../../../Assets/Gifs/fullstack.gif";
 import competitive from "../../../Assets/Gifs/competitive.webp";
@@ -13,45 +12,50 @@ function Home() {
       <div className="container parentbanner">
         <div className="row childbanner">
           <div className="col-sm-12 col-lg-5 col-md-5 text-center align-bottom textdiv">
-            <div className="font-weight-bold fs-2 ">
-              <p>Hello 👋, I'm Kelvin Wachira. Thanks for stopping by.</p>
-            </div>
             <div className="aboutdiv">
-              <p className="text-decoration-underline font-weight-bold">
+              <br></br>
+              <br></br>
+              <br></br>
+              <span
+                className="text-decoration-underline fw-bold fs-3"
+                style={{ fontFamily: "Poetsen One" }}
+              >
                 Developer • Techie • Engineer
-              </p>
-              <p>
+              </span>
+              <br></br>
+              <br></br>
+
+              <span>
                 I apply analytic thinking to problems and find a pragmatic
                 solutions that aren't quick fixes, but of lasting value.
-              </p>
+              </span>
             </div>
           </div>
           <div className="imagediv d-none d-md-block col-lg-5 col-md-6">
-            <img className="img-fluid headerimg" src={locssmileblue} />
+            <img className="img-fluid headerimg" src={locssmileblue} alt="Kelvin Wachira"/>
           </div>
         </div>
       </div>
 
-
       <div className="container text-center fs-2 fw-bold mt-5">
         <p> Here's what I have done</p>
       </div>
-      <div class="container text-center ">
-        <div class="container">
-          <div class="row d-flex justify-content-round ">
+      <div className="container text-center ">
+        <div className="container">
+          <div className="row d-flex justify-content-round ">
             {/* <%# Card 1 %> */}
-            <div class="col-sm-4">
-              <div class="card">
+            <div className="col-sm-4">
+              <div className="card">
                 <div>
-                  <img className="Home_lottieImg__gBEbz" src={animation_500_} />
+                  <img className="Home_lottieImg__gBEbz" src={animation_500_} alt="..." />
                 </div>
-                <div class="p-2 ">
-                  <h5 class="card-title" style={{ fontWeight: "bold" }}>
+                <div className="p-2 ">
+                  <h5 className="card-title" style={{ fontWeight: "bold" }}>
                     Backend Developer
                   </h5>
                 </div>
-                <div class="card-body">
-                  <p class="card-text">
+                <div className="card-body">
+                  <p className="card-text">
                     Behind the scenes hero - fulfilled by driving the back-side
                     of success. With a text editor and a vision, I'm a sucker
                     for writing code.
@@ -60,18 +64,18 @@ function Home() {
               </div>
             </div>
             {/* <%# Card 2 %> */}
-            <div class="col-sm-4">
-              <div class="card">
+            <div className="col-sm-4">
+              <div className="card">
                 <div>
-                  <img className="Home_lottieImg__gBEbz" src={bluedashboard} />
+                  <img className="Home_lottieImg__gBEbz" src={bluedashboard} alt="..."/>
                 </div>
-                <div class=" p-2 ">
-                  <h5 class="card-title" style={{ fontWeight: "bold" }}>
+                <div className=" p-2 ">
+                  <h5 className="card-title" style={{ fontWeight: "bold" }}>
                     Automation Engineer
                   </h5>
                 </div>
-                <div class="card-body">
-                  <p class="card-text">
+                <div className="card-body">
+                  <p className="card-text">
                     Salesforce developer with strong Salesforce admin and
                     development skills. I enable and create user-friendly and
                     visually pleasing dashboards.
@@ -80,18 +84,18 @@ function Home() {
               </div>
             </div>
             {/* <%# Card 3 %> */}
-            <div class="col-sm-4">
-              <div class="card">
+            <div className="col-sm-4">
+              <div className="card">
                 <div>
-                  <img className="Home_lottieImg__gBEbz" src={fullstack} />
+                  <img className="Home_lottieImg__gBEbz" src={fullstack} alt="..."/>
                 </div>
-                <div class=" p-2">
-                  <h5 class="card-title" style={{ fontWeight: "bold" }}>
+                <div className=" p-2">
+                  <h5 className="card-title" style={{ fontWeight: "bold" }}>
                     Project Management
                   </h5>
                 </div>
-                <div class="card-body">
-                  <p class="card-text">
+                <div className="card-body">
+                  <p className="card-text">
                     Being involved in the end to end product design process from
                     discovery to ideation, prototyping and testing.
                   </p>
@@ -102,45 +106,47 @@ function Home() {
         </div>
       </div>
 
-      <div class="container text-center fs-2 fw-bold mt-5 ">
-        <p class="mt-5 ">Recent Activity</p>
+      <div className="container text-center fs-2 fw-bold mt-5 ">
+        <p className="mt-5 ">Recent Activity</p>
       </div>
-      <div class="container  text-center  ">
-        <div class="container">
-          <div class="row d-flex justify-content-round">
+      <div className="container  text-center  ">
+        <div className="container">
+          <div className="row d-flex justify-content-round">
             {/* <%# Card 1 %> */}
-            <div class="col-sm-6">
-              <div class="card cards">
+            <div className="col-sm-6">
+              <div className="card cards">
                 <div>
-                  <img className="Home_lottieImg__gBEbz" src={openssoucecode} />
+                  <img className="Home_lottieImg__gBEbz" src={openssoucecode} alt="..."/>
                 </div>
-                <div class=" p-2 ">
-                  <h5 class="card-title" style={{ fontWeight: "bold" }}>
+                <div className=" p-2 ">
+                  <h5 className="card-title" style={{ fontWeight: "bold" }}>
                     Open-Source Contribution
                   </h5>
                 </div>
-                <div class="card-body">
-                  <p class="card-text">
-                    Wikimedia is a global movement whose mission is to bring free educational content to the world.
-                    Its written in python. I have
-                    worked on creating scripts that connect various wikimedia objects together to make it more infomative and closer to achieving its goal.
+                <div className="card-body">
+                  <p className="card-text">
+                    Wikimedia is a global movement whose mission is to bring
+                    free educational content to the world. Its written in
+                    python. I have worked on creating scripts that connect
+                    various wikimedia objects together to make it more
+                    infomative and closer to achieving its goal.
                   </p>
                 </div>
               </div>
             </div>
             {/* <%# Card 2 %> */}
-            <div class="col-sm-6">
-              <div class="card cards">
+            <div className="col-sm-6">
+              <div className="card cards">
                 <div>
-                  <img className="Home_lottieImg__gBEbz" src={competitive} />
+                  <img className="Home_lottieImg__gBEbz" src={competitive} alt="..."/>
                 </div>
-                <div class=" p-2 ">
-                  <h5 class="card-title" style={{ fontWeight: "bold" }}>
+                <div className=" p-2 ">
+                  <h5 className="card-title" style={{ fontWeight: "bold" }}>
                     Competitive Programming
                   </h5>
                 </div>
-                <div class="card-body">
-                  <p class="card-text">
+                <div className="card-body">
+                  <p className="card-text">
                     I keep a beginners mind by playing and experimenting without
                     the fear of failure. There will always be things I have to
                     learn and I will make mistakes, which develop me, and
