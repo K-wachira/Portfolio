@@ -1,6 +1,7 @@
 import postModel from "../models/postModel.js";
 import mongodb from "mongodb";
 const ObjectId = mongodb.ObjectID;
+import fs from "fs";
 
 export default class PostsDAO {
   static async createNewPost(post) {
@@ -90,18 +91,17 @@ export default class PostsDAO {
       return categories;
     }
   }
-
-  static async updatePostById(update_data) {
+  static async updatePostById(req) {
     try {
       const updateResponse = await postModel.findOneAndUpdate(
-        { _id: ObjectId(update_data.post_id) },
+        { _id: ObjectId(req.body.post_id) },
         {
           $set: {
-            title: update_data.title,
-            description: update_data.description,
-            cover_image: update_data.cover_image,
-            category: update_data.category,
-            tags: update_data.tags,
+            title: req.body.title,
+            description: req.body.description,
+            cover_image: req.body.cover_image,
+            category: req.body.category,
+            tags: req.body.tags,
           },
         }
       );
@@ -112,7 +112,30 @@ export default class PostsDAO {
       return { error: e };
     }
   }
-
+  static async uploadCover(req) {
+    console.log(typeof fs.readFileSync("uploads/" + req.file.filename));
+    try {
+      const saveImage = postModel({
+        _id: ObjectId(req.body.post_id),
+        img: {
+          data: fs.readFileSync("uploads/" + req.file.filename),
+          contentType: "image/png",
+        },
+      });
+      saveImage
+        .save()
+        .then((res) => {
+          console.log("image is saved");
+        })
+        .catch((err) => {
+          console.log(err, "error has occur");
+        });
+      console.log("Image Update", req.file.filename);
+    } catch (e) {
+      console.error(`Unable to upload cover: ${e}`);
+      return { error: e };
+    }
+  }
   static async deletePostById(post_id) {
     try {
       const deletePost = await postModel.findOneAndDelete({
