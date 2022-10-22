@@ -9,15 +9,9 @@ import Loading from "../../Shared/Loading.jsx";
 import parse from "html-react-parser";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import moment from "moment";
+
 const EditPost = (props) => {
-  const initialPostState = {
-    _id: null,
-    title: "",
-    description: "",
-    category: "",
-    tags: [],
-    elements: [{}],
-  };
   const [post, setPost] = useState([]);
   const params = useParams();
 
@@ -26,7 +20,6 @@ const EditPost = (props) => {
   }, []);
 
   const notify = (props) => {
-    console.log(props.value);
     let options = {
       position: "top-center",
       autoClose: 1000,
@@ -36,26 +29,22 @@ const EditPost = (props) => {
       draggable: true,
       theme: "colored",
     };
-    switch (props.value) {
-      case "Element Create":
-        return toast.success("Element Created!", options);
-      case "Element Update":
-        return toast.success("Element Updated!", options);
-      case "Element Delete":
-        return toast.success("Element Deleted!", options);
-      case "Element Hide":
-        return toast.success("Element Hidden!", options);
-      case "Element Unhide":
-        return toast.success("Element Visible", options);
-      case "Post Update":
-        return toast.success("Post Updated!", options);
-      case "Post Publish":
-        return toast.success("Post Published!", options);
-      case "Post Unpublish":
-        return toast.success("Post Unpublished!", options);
-      default:
-        return toast.warn("Did not excecute cases", options);
-    }
+
+    const notifiers = {
+      1: "Element Created",
+      2: "Element Updated!",
+      3: "Element Deleted!",
+      4: "Element Hidden!",
+      5: "Element Visible!",
+      6: "Elements Rearranged!",
+      7: "Post Updated!",
+      8: "Post Publish!",
+      9: "Post Unpublished!",
+    };
+
+    props.value in Object.keys(notifiers)
+      ? toast.success(notifiers[props.value], options)
+      : toast.warn("Did not excecute cases", options);
   };
 
   const getPost = (id) => {
@@ -73,11 +62,10 @@ const EditPost = (props) => {
     const id = {
       post_id: post._id,
     };
-    console.log("post", post);
     let obj = { ...log, ...id };
     PostDataService.updatePost(obj)
       .then((response) => {
-        notify({ value: "Post Update" });
+        notify({ value: 7 });
         getPost(post._id);
       })
       .catch((e) => {
@@ -85,12 +73,19 @@ const EditPost = (props) => {
       });
   };
 
-  props = {
-    handleForm: handleForm,
-    title: post.title,
-    description: post.description,
-    tags: post.tags,
-    category: post.category,
+  const publish = () => {
+    var data = {
+      flag: post.published ? false : true,
+      post_id: post._id,
+    };
+    PostDataService.publishToggle(data)
+      .then((response) => {
+        getPost(post._id);
+        data.flag ? notify({ value: 8 }) : notify({ value: 9 });
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
 
   const handleElementUpdate = (data) => {
@@ -98,7 +93,7 @@ const EditPost = (props) => {
       .then((response) => {
         post.elements[data.element_index].body = data.body;
         getPost(post._id);
-        notify({ value: "Element Update" });
+        notify({ value: 2 });
       })
       .catch((e) => {
         console.log(e);
@@ -112,7 +107,7 @@ const EditPost = (props) => {
     };
     ElementDataService.createElement(data)
       .then((response) => {
-        notify({ value: "Element Create" });
+        notify({ value: 1 });
         getPost(post._id);
       })
       .catch((e) => {
@@ -136,113 +131,146 @@ const EditPost = (props) => {
   }
 
   function test() {
-    notify({ value: "Element Create" });
+    notify({ value: 1 });
   }
 
   return (
     <div className="container pt-5">
       {post._id ? (
         <div className="container pt-5">
-          <Link to={"/Posts"} className="btn btn-primary mx-4 mb-1">
-            All Posts
-          </Link>
           <div className="row">
             <div className="col-md-4">
-              <div className="card">
-                <div className="card-body">
-                  <h4 className="card-body"> Editing Post</h4>
-                  <Forms {...props} />
+              <div className=" d-flex bd-highlight mb-4">
+                <Link to={"/Posts"} className="btn btn-secondary mb-1">
+                  Back
+                </Link>
+              </div>
+              <div className="card border">
+                <div className="card-header">
+                  <h6 className="fw-bold mb-0"> Editing Post</h6>
+                </div>
+                <div className="card-text">
+                  <Forms handleForm={handleForm} {...post} />
+                </div>
+                <div className="container d-grid mb-4">
+                  <div
+                    onClick={() => {
+                      publish();
+                    }}
+                    className="btn btn-secondary btn-block"
+                  >
+                    {post.published ? (
+                      <h6 className="mb-0">Unpublish</h6>
+                    ) : (
+                      <h6 className="mb-0 ">Publish</h6>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
             <div className="col-md-8">
-              <div className="card">
-                <div className="card-body">
-                  <div className="d-flex bd-highlight">
-                    <h3 className="p-2 bd-highlight">
-                      <i
-                        onClick={() => {
-                          createElement(post._id);
-                        }}
-                        className="bi bi-paragraph"
-                      ></i>
-                    </h3>
-                    <h3 className="p-2 bd-highlight">
-                      <i className="bi bi-card-image"></i>
-                    </h3>
-                  </div>
+              <div className="d-flex bd-highlight mb-4">
+                <h3 className="bd-highlight">
+                  <i
+                    onClick={() => {
+                      createElement(post._id);
+                    }}
+                    className="bi bi-paragraph"
+                  ></i>
+                </h3>
+                <h3 className="bd-highlight">
+                  <i className="bi bi-card-image"></i>
+                </h3>
+              </div>
+              <div className="card border">
+                <div className="card-header">
+                  {post.published ? (
+                    <h6 className="mb-0 text-end">
+                      <span class="m-2 badge bg-primary">Published</span>
+                      {/* <span className="fw-bold">Published </span>{" "} */}
+                      {moment(post.published_at).fromNow()}
+                    </h6>
+                  ) : (
+                    <h6 className="fw-bold mb-0 text-end">Unpublished</h6>
+                  )}
+                </div>
+                <div className="card-body bg-light">
                   <div className="bg-light">
-                    {post.elements.map((element, key) => {
-                      return (
-                        <div className="mb-2 p-3 paragraph " key={key}>
-                          <div className="m-2">
-                            <div className="d-flex flex-row-reverse bd-highlight">
-                              <div className="p-1 bd-highlight">
-                                <i
-                                  onClick={() => {
-                                    test();
-                                  }}
-                                  className="bi bi-chevron-compact-up "
-                                ></i>
-                              </div>
-                              <div className="p-1 bd-highlight">
-                                <i
-                                  onClick={() => {
-                                    test();
-                                  }}
-                                  className="bi bi-chevron-compact-down"
-                                ></i>
-                              </div>
-                              <div className="p-1 bd-highlight">
-                                {element.hidden ? (
+                    {post.elements
+                      .sort((a, b) =>
+                        a.element_index > b.element_index ? 1 : -1
+                      )
+                      .map((element, key) => {
+                        return (
+                          <div className="mb-2 p-2 paragraph " key={key}>
+                            <div className="m-2">
+                              <div className="d-flex flex-row-reverse bd-highlight">
+                                <div className="p-1 bd-highlight">
                                   <i
                                     onClick={() => {
                                       test();
                                     }}
-                                    className="bi bi-eye-slash"
+                                    className="bi bi-chevron-compact-up "
                                   ></i>
-                                ) : (
+                                </div>
+                                <div className="p-1 bd-highlight">
                                   <i
                                     onClick={() => {
                                       test();
                                     }}
-                                    className="bi bi-eye"
+                                    className="bi bi-chevron-compact-down"
                                   ></i>
-                                )}
-                              </div>
-                            </div>
-                            <div className="paragraph-content">
-                              <div>
-                                <p>{parse(element.body)}</p>
-                              </div>
-                            </div>
-                            <div className="paragraph-form  d-none">
-                              <div>
-                                <div className="d-flex flex-row-reverse bd-highlight">
-                                  <div className="p-2 bd-highlight">
+                                </div>
+                                <div className="p-1 bd-highlight">
+                                  {element.hidden ? (
                                     <i
                                       onClick={() => {
-                                        deleteElement(
-                                          element.element_index,
-                                          post._id
-                                        );
+                                        test();
                                       }}
-                                      className="cancel bi bi-trash"
+                                      className="bi bi-eye-slash"
                                     ></i>
-                                  </div>
+                                  ) : (
+                                    <i
+                                      onClick={() => {
+                                        test();
+                                      }}
+                                      className="bi bi-eye"
+                                    ></i>
+                                  )}
                                 </div>
+                              </div>
+                              <div className="paragraph-content">
+                                <div>
+                                  <p>{parse(element.body)}</p>
+                                </div>
+                              </div>
+                              <div className="paragraph-form  d-none">
+                                <div>
+                                  <div className="d-flex flex-row-reverse bd-highlight">
+                                    <div className="p-2 bd-highlight">
+                                      <i
+                                        onClick={() => {
+                                          deleteElement(
+                                            element.element_index,
+                                            post._id
+                                          );
+                                        }}
+                                        className="cancel bi bi-trash"
+                                      ></i>
+                                    </div>
+                                  </div>
 
-                                <Editor
-                                  handleElementUpdate={handleElementUpdate}
-                                  {...element}
-                                  post_id={post._id}
-                                />
+                                  <Editor
+                                    handleElementUpdate={handleElementUpdate}
+                                    {...element}
+                                    post_id={post._id}
+                                  />
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                      );
-                    })}
+                        );
+                      })}
                   </div>
                 </div>
               </div>
