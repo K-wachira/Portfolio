@@ -5,13 +5,14 @@ import PostDataService from "../Services/posts.service.js";
 import Loading from "../../Shared/Loading.jsx";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import moment from "moment";
+
 const PostList = (props) => {
   const [posts, setPosts] = useState([]);
   const [categories, setCategories] = useState([]);
-
-
-    const notify = (props) => {
-    console.log(props.value);
+  const image =
+    "https://images.unsplash.com/photo-1587620962725-abab7fe55159?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1031&q=80";
+  const notify = (props) => {
     let options = {
       position: "top-center",
       autoClose: 5000,
@@ -42,7 +43,7 @@ const PostList = (props) => {
   const retrievePosts = () => {
     PostDataService.getAll()
       .then((response) => {
-        setPosts(response.data.posts);
+        setPosts(response.data);
       })
       .catch((e) => {
         console.log(e);
@@ -50,10 +51,9 @@ const PostList = (props) => {
   };
 
   const createNewPost = () => {
-    console.log("New Post")
     PostDataService.createPost()
       .then((response) => {
-        notify({value: "Post Create"})
+        notify({ value: "Post Create" });
         retrievePosts();
       })
       .catch((e) => {
@@ -61,6 +61,16 @@ const PostList = (props) => {
       });
   };
 
+  const deletePost = (id) => {
+    PostDataService.deletePost({ post_id: id })
+      .then((response) => {
+        notify({ value: "Post Create" });
+        retrievePosts();
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
   const refreshList = () => {
     retrievePosts();
   };
@@ -84,18 +94,56 @@ const PostList = (props) => {
             </h4>
             {posts.map((post, key) => {
               return (
-                <div className="card bg-light mb-3 rounded-3" key={key}>
-                  <div className="card-body">
-                    <h5 className="card-title md-1 text-dark">{post.title}</h5>
-                    <p className="text-secondary mb-0">{post.description}</p>
-                    <Link
-                      to={"/editPost/" + post._id + "/edit"}
-                      state={{ from: "path", id: post._id }}
-                      post={post._id}
-                      className="btn btn-primary col-lg-5 mx-1 mb-1"
-                    >
-                      View Post
-                    </Link>
+                <div className="card bg-light mb-3 rounded-3 " key={key}>
+                  <div className="row g-0">
+                    <div className="col-md-4 ">
+                      <img src={image} alt="" className="img-fluid" />
+                    </div>
+
+                    <div className="col-md-8">
+                      <div className="row mt-2">
+                        <div className="col-md-6">
+                          {post.published ? (
+                            <span class="m-2 badge bg-primary">Published</span>
+                          ) : (
+                            <h6 className="m-2 badge bg-secondary">
+                              Unpublished
+                            </h6>
+                          )}
+                        </div>
+                        <div className="col-md-6 text-end">
+                          <div className="d-flex flex-row-reverse bd-highlight">
+                            <div className="p-2 bd-highlight">
+                              <i
+                                onClick={() => {
+                                  deletePost(post._id);
+                                }}
+                                className="cancel bi bi-trash"
+                              ></i>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="card-body">
+                        <h2 className="card-title text-dark fw-bold">
+                          {post.title}
+                        </h2>
+                        <p className="card-text mb-0">{post.description}</p>
+                        <p class="card-text ">
+                          <small class="text-muted">
+                            Last updated{" "}
+                            <span> {moment(post.updatedAt).fromNow()}</span>
+                          </small>
+                        </p>
+
+                        <Link
+                          to={"/editPost/" + post._id + "/edit"}
+                          state={{ from: "path", id: post._id }}
+                          post={post._id}
+                          className="stretched-link"
+                        ></Link>
+                      </div>
+                    </div>
                   </div>
                 </div>
               );
