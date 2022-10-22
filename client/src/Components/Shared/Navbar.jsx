@@ -2,11 +2,10 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import locssmileblue from "../../Assets/Images/locssmileblue.svg";
-import { Link } from "react-router-dom";
 
 function MyNavbar() {
   return (
-    <Navbar collapseOnSelect expand="lg" fixed="top" bg="light" >
+    <Navbar  className="fw-bold fst-italic" collapseOnSelect expand="lg" fixed="top">
       <Container>
         <div className="d-sm-none">
           <img
@@ -24,25 +23,11 @@ function MyNavbar() {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto"></Nav>
           <Nav>
-            <Nav.Link
-              href="/Blog"
-              style={({ fontWeight: "bold" }, { fontStyle: "italic" })}
-            >
+            <Nav.Link href="/Blog">
               Blog
             </Nav.Link>
-
-            <Nav.Link
-              eventKey={2}
-              href="/LetsChat"
-            >
-            <button class="pushable">
-            <Link
-              to={"/LetsChat"}
-              className="front"
-            >
-              Lets chat
-            </Link>
-            </button>
+            <Nav.Link href="/About">
+              About
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
