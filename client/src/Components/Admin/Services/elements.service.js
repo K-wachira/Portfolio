@@ -11,8 +11,7 @@ class ElementDataService {
   }
 
   deleteElement(data) {
-    console.log(data);
-    return http.delete("/element", {
+     return http.delete("/element", {
       data: { post_id: data.post_id, element_index: data.element_index },
     });
   }
