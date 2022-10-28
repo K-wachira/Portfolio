@@ -19,8 +19,8 @@ const PostList = (props) => {
     // retrievCategories();
   }, []);
 
-  const retrievePosts = () => {
-    PostDataService.getAll()
+  const async retrievePosts = () => {
+    await PostDataService.getAll()
       .then((response) => {
         setPosts(response.data);
       })
@@ -32,8 +32,8 @@ const PostList = (props) => {
       });
   };
 
-  const createNewPost = () => {
-    PostDataService.createPost()
+  const async createNewPost = () => {
+    await PostDataService.createPost()
       .then((response) => {
         Notifier({ value: "success", message: "New Post Created" });
         retrievePosts();
@@ -46,8 +46,8 @@ const PostList = (props) => {
       });
   };
 
-  const deletePost = (id) => {
-    PostDataService.deletePost({ post_id: id })
+  const async deletePost = (id) => {
+    await PostDataService.deletePost({ post_id: id })
       .then((response) => {
         Notifier({ value: "success", message: "Post Deleted" });
       })
