@@ -1,0 +1,160 @@
+body {
+  font-family: sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 18px;
+  letter-spacing: 0em;
+  text-rendering: optimizeLegibility;
+  height: auto;
+  background: transparent;
+}
+
+/* code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    "Raleway", monospace, "Poetsen One";
+} */
+
+/* Container contaning the header image and text */
+.parentbanner {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+  justify-content: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+/* nested Container contaning the header image and text */
+.childbanner {
+  height: 100%;
+  /* background: rgb(19, 21, 139); */
+  display: flex;
+  align-items: center;
+  justify-content: round;
+}
+/* Header image config */
+.headerimg {
+  width: 100%;
+  height: 150%;
+}
+
+.imagediv {
+  align-content: space-around;
+  padding-left: 50px;
+  height: 40%;
+}
+
+.textdiv {
+  font-size: 10px;
+  padding-top: 50px;
+  height: 40%;
+}
+
+.aboutdiv {
+  font-size: 10px;
+  align-content: center;
+  align-content: space-around;
+  line-height: 1.8em;
+  font-size: medium;
+}
+/* Bolds out my name */
+.myname {
+  font-family: "europa";
+  font-weight: 700;
+  font-style: normal;
+  font-size: 50px;
+  line-height: 1.7em;
+  letter-spacing: 0em;
+  text-transform: none;
+  color: #111;
+}
+
+/* Cards that hold the what i am doing/done */
+/* .cards {
+  max-width: 23rem;
+} */
+
+/* title on cards on the front page */
+.card-title {
+  font-family: "europa";
+  font-weight: 500;
+  font-style: normal;
+  font-size: 18px;
+  line-height: 1.7em;
+  letter-spacing: 0em;
+  text-transform: none;
+  color: #111;
+}
+
+.Home_lottieImg__gBEbz {
+  height: 200px;
+  width: auto;
+}
+
+.card {
+  border: none;
+}
+
+.hover {
+  background-color: #f8f9fa;
+  cursor: pointer;
+}
+.paragraph:hover {
+  transition: background-color 0.5s ease;
+}
+
+.pushable {
+  background: rgb(209, 207, 208);
+  border-radius: 10px;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  outline-offset: 4px;
+}
+.front {
+  display: block;
+  padding: 6px 6px;
+  border-radius: 12px;
+  font-size: 1rem;
+  background: rgb(86, 81, 83);
+  color: white;
+  transform: translateY(-6px);
+}
+
+.pushable:active .front {
+  transform: translateY(-2px);
+}
+
+/* selected link */
+.front:active {
+  color: #ffffff;
+}
+.front:link {
+  text-decoration: none;
+}
+
+/* mouse over link */
+.front:hover {
+  color: #ffffff;
+}
+
+.contact {
+  max-width: 40%;
+}
+
+.contactbanner {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+  justify-content: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.post-image {
+  width: 375px; /* You can set the dimensions to whatever you want */
+  height: 275px;
+  object-fit: cover;
+}
