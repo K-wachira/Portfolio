@@ -24,6 +24,7 @@
     "react-text-truncate": "^0.19.0",
     "react-toastify": "^9.0.8",
     "sass": "^1.55.0",
+    "serve": "^14.0.1",
     "web-vitals": "^2.1.0"
   },
   "engines": {
@@ -36,8 +37,8 @@
   },
   "scripts": {
     "heroku-prebuild": "rm -rf node_modules && npm install",
-    "start": "react-scripts start",
     "build": "react-scripts build",
+    "start": "serve -s build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
