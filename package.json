@@ -35,6 +35,7 @@
     "os": false
   },
   "scripts": {
+    "heroku-prebuild": "rm -rf node_modules && npm install",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
