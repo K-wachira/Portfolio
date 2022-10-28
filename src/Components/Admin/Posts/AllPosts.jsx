@@ -8,7 +8,7 @@ import NetworkError from "../../Shared/NetworkError.jsx";
 import moment from "moment";
 import Notifier from "../../Shared/Notifier.jsx";
 
-const PostList = (props) => {
+function PostList = (props) => {
   const [posts, setPosts] = useState([]);
   const [networkBreak, setNetworkBreak] = useState(false);
   const image =
@@ -19,7 +19,7 @@ const PostList = (props) => {
     // retrievCategories();
   }, []);
 
-  const async retrievePosts = () => {
+  function async retrievePosts = () => {
     await PostDataService.getAll()
       .then((response) => {
         setPosts(response.data);
@@ -32,7 +32,7 @@ const PostList = (props) => {
       });
   };
 
-  const async createNewPost = () => {
+  function async createNewPost = () => {
     await PostDataService.createPost()
       .then((response) => {
         Notifier({ value: "success", message: "New Post Created" });
@@ -46,7 +46,7 @@ const PostList = (props) => {
       });
   };
 
-  const async deletePost = (id) => {
+  function async deletePost = (id) => {
     await PostDataService.deletePost({ post_id: id })
       .then((response) => {
         Notifier({ value: "success", message: "Post Deleted" });
