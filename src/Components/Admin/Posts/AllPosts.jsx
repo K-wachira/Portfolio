@@ -8,7 +8,7 @@ import NetworkError from "../../Shared/NetworkError.jsx";
 import moment from "moment";
 import Notifier from "../../Shared/Notifier.jsx";
 
-function PostList = (props) => {
+function PostList  (props) {
   const [posts, setPosts] = useState([]);
   const [networkBreak, setNetworkBreak] = useState(false);
   const image =
