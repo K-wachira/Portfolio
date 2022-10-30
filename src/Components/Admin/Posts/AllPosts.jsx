@@ -19,7 +19,7 @@ function PostList  (props) {
     // retrievCategories();
   }, []);
 
-  function async retrievePosts = () => {
+  async function  retrievePosts  ()  {
     await PostDataService.getAll()
       .then((response) => {
         setPosts(response.data);
@@ -32,7 +32,7 @@ function PostList  (props) {
       });
   };
 
-  function async createNewPost = () => {
+   async function  createNewPost  ()  {
     await PostDataService.createPost()
       .then((response) => {
         Notifier({ value: "success", message: "New Post Created" });
@@ -46,7 +46,7 @@ function PostList  (props) {
       });
   };
 
-  function async deletePost = (id) => {
+  async function deletePost  (id)  {
     await PostDataService.deletePost({ post_id: id })
       .then((response) => {
         Notifier({ value: "success", message: "Post Deleted" });
