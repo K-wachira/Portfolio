@@ -13,47 +13,43 @@ function Contact() {
           </div>
           <div className="row">
             <div className="imagediv d-none d-md-block col-lg-5 col-md-6">
-              <img className="img-fluid headerimg" src={locssmileblue} alt="..."/>
+              <img
+                className="img-fluid headerimg"
+                src={locssmileblue}
+                alt="..."
+              />
             </div>
             <div className="col-sm-12 col-lg-7 col-md-5 text-center align-bottom textdiv">
               <div className="fs-5 ">
                 <div className="container   text-start text-wrap">
                   <span>
-                    I'm currently pursuing a Master's degree at Carnegie Mellon
-                    University, focusing on Entertainment Technology (computer
-                    graphics). I've recently graduated from the
-                    <a
-                      href="https://www.saic.edu/"
-                      target="_blank"
-                      rel="noreferrer noopener"
-                    >
-                      School of the Art Institute of Chicago.
-                    </a>
+                    Right now I am learning more about product management. I
+                    have been an engineer for almost 2 years and its great to
+                    build products, but I want to learn how to think
+                    strategically about what we build.
                   </span>
                   <br></br>
                   <br></br>
                   <span>
-                    I focus on people's everyday thinking, emotions, and
-                    behavior to make human-centered designs that can improve the
-                    daily life of people.
+                    The coolest project I ever built was creating a browser
+                    extension that enables clients to provide micro-feedback on
+                    various interactions they have with a specific vendors in
+                    online meetings. It's my proudest because I was involved in
+                    the entire product pipeline, from how users interact with
+                    extensions to how data is inserted, updated, and enriched on
+                    the backend. It's also my favorite because I got to
+                    experiment with various technologies using platforms like
+                    Foundry with user data to understand
                   </span>
                   <br></br>
                   <br></br>
                   <span>
-                    My skill set covers a variety of areas related to UX design
-                    such as user research, data analysis, and interaction
-                    design. I like to extract creative solutions to enhance
-                    users’ experiences through design thinking.
+                    My skill set covers a variety of areas related to
+                    backend-development, automations, data analysis, and machine
+                    learning.
                   </span>
-                  My interest also lies in
-                  <a
-                    href="https://www.flickr.com/photos/leahleeart/"
-                    target="_blank"
-                    rel="noreferrer noopener"
-                  >
-                    photography
-                  </a>
-                  , XR design, and 3D motion graphics.
+                  Outside of work, I love bike ridding, rollerskating and
+                  occasional hiking photography
                 </div>
               </div>
             </div>
