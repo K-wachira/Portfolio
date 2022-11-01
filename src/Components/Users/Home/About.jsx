@@ -55,13 +55,7 @@ function Contact() {
             </div>
           </div>
         </div>
-        <div className="container bg-dark h-100 text-center">
-          <button className="pushable">
-            <a href="mailto:abkelvinwachira@gmail.com" className="front">
-              Lets chat
-            </a>
-          </button>
-        </div>
+
       </div>
     </div>
   );
