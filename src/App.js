@@ -16,7 +16,7 @@ function App() {
       <ToastContainer transition={Zoom} />
       <MyNavbar />
       <Views />
-      <MyFooter/>
+      {/* <MyFooter/> */}
     </Router>
   );
 }

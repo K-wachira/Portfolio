@@ -32,7 +32,11 @@ function Home() {
             </div>
           </div>
           <div className="imagediv d-none d-md-block col-lg-5 col-md-6">
-            <img className="img-fluid headerimg" src={locssmileblue} alt="Kelvin Wachira"/>
+            <img
+              className="img-fluid headerimg"
+              src={locssmileblue}
+              alt="Kelvin Wachira"
+            />
           </div>
         </div>
       </div>
@@ -47,7 +51,11 @@ function Home() {
             <div className="col-sm-4">
               <div className="card">
                 <div>
-                  <img className="Home_lottieImg__gBEbz" src={animation_500_} alt="..." />
+                  <img
+                    className="Home_lottieImg__gBEbz"
+                    src={animation_500_}
+                    alt="..."
+                  />
                 </div>
                 <div className="p-2 ">
                   <h5 className="card-title" style={{ fontWeight: "bold" }}>
@@ -67,7 +75,11 @@ function Home() {
             <div className="col-sm-4">
               <div className="card">
                 <div>
-                  <img className="Home_lottieImg__gBEbz" src={bluedashboard} alt="..."/>
+                  <img
+                    className="Home_lottieImg__gBEbz"
+                    src={bluedashboard}
+                    alt="..."
+                  />
                 </div>
                 <div className=" p-2 ">
                   <h5 className="card-title" style={{ fontWeight: "bold" }}>
@@ -87,7 +99,11 @@ function Home() {
             <div className="col-sm-4">
               <div className="card">
                 <div>
-                  <img className="Home_lottieImg__gBEbz" src={fullstack} alt="..."/>
+                  <img
+                    className="Home_lottieImg__gBEbz"
+                    src={fullstack}
+                    alt="..."
+                  />
                 </div>
                 <div className=" p-2">
                   <h5 className="card-title" style={{ fontWeight: "bold" }}>
@@ -116,7 +132,11 @@ function Home() {
             <div className="col-sm-6">
               <div className="card cards">
                 <div>
-                  <img className="Home_lottieImg__gBEbz" src={openssoucecode} alt="..."/>
+                  <img
+                    className="Home_lottieImg__gBEbz"
+                    src={openssoucecode}
+                    alt="..."
+                  />
                 </div>
                 <div className=" p-2 ">
                   <h5 className="card-title" style={{ fontWeight: "bold" }}>
@@ -138,7 +158,11 @@ function Home() {
             <div className="col-sm-6">
               <div className="card cards">
                 <div>
-                  <img className="Home_lottieImg__gBEbz" src={competitive} alt="..."/>
+                  <img
+                    className="Home_lottieImg__gBEbz"
+                    src={competitive}
+                    alt="..."
+                  />
                 </div>
                 <div className=" p-2 ">
                   <h5 className="card-title" style={{ fontWeight: "bold" }}>
@@ -159,6 +183,36 @@ function Home() {
           </div>
         </div>
       </div>
+      <footer className="text-muted py-5 bg-light">
+        <div className="container">
+          <p className="float-end">
+            <i href="#" className="bi bi-arrow-up-circle">
+              <a href="#">Back to top</a>
+            </i>
+          </p>
+          <div className="container text-center">
+            <button className="pushable">
+              <a
+                href="https://drive.google.com/file/d/1uC9gO9D4JxTcUyJGuoAO_D0F0967SHNL/view?usp=sharing"
+                className="front b"
+              >
+                Resume
+              </a>
+            </button>
+            <button className="pushable">
+              <a
+                href="https://github.com/k-wachira"
+                className="front bi bi-github"
+              ></a>
+            </button>
+            <button className="pushable">
+              <a href="mailto:abkelvinwachira@gmail.com" className="front ">
+                Lets chat
+              </a>
+            </button>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }

@@ -1,6 +1,6 @@
 function MyFooter() {
   return (
-    <footer class="text-muted py-5 bg-light text-center">
+    <footer class="text-muted py-5 bg-light">
       <div class="container">
         <p class="float-end">
           <i href="#" class="bi bi-arrow-up-circle">

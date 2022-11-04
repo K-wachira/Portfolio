@@ -3,8 +3,7 @@ import locssmileblue from "../../../Assets/Images/locssmileblue.svg";
 
 function Contact() {
   return (
-    <div>
-      <div className="container parentbanner py-5 ">
+      <div className="container parentbanner py-5">
         <div className="row childbanner py-5">
           <div className="row py-5">
             <div style={{ fontFamily: "Poetsen One" }} className="fs-4 fw-bold">
@@ -58,7 +57,7 @@ function Contact() {
             </div>
           </div>
         </div>
-      </div>
+
     </div>
   );
 }
