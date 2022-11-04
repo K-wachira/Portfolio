@@ -39,7 +39,8 @@ function Contact() {
                     extensions to how data is inserted, updated, and enriched on
                     the backend. It's also my favorite because I got to
                     experiment with various technologies using platforms like
-                    Foundry with user data to understand
+                    Foundry with user data to understand relationships between
+                    clients and vendors quickly.
                   </span>
                   <br></br>
                   <br></br>
@@ -48,6 +49,8 @@ function Contact() {
                     backend-development, automations, data analysis, and machine
                     learning.
                   </span>
+                  <br></br>
+                  <br></br>
                   Outside of work, I love bike ridding, rollerskating and
                   occasional hiking photography
                 </div>
@@ -55,7 +58,6 @@ function Contact() {
             </div>
           </div>
         </div>
-
       </div>
     </div>
   );

@@ -7,6 +7,7 @@ import NetworkError from "../../Shared/NetworkError.jsx";
 import moment from "moment";
 import Notifier from "../../Shared/Notifier.jsx";
 import TextTruncate from "react-text-truncate"; // recommend
+import UnderContruction from "../../Shared/Underdevelopment.jsx"
 
 function BlogPosts() {
   const [posts, setPosts] = useState([]);
@@ -73,7 +74,7 @@ function BlogPosts() {
     </div>
   ) : (
     <div className="container">
-      {networkBreak ? <NetworkError /> : <Loading />}
+      {networkBreak ? <NetworkError /> : <UnderContruction />}
     </div>
   );
 }
